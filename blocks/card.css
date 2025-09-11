@@ -32,6 +32,9 @@
 .card__title-bridge {
   width: 353px;
   height: 24px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .card__title-tunnel {
@@ -57,6 +60,11 @@
   border: none;
   background-color: transparent;
   opacity: 40%;
+}
+
+.card__like-btn:hover {
+  cursor: pointer;
+  opacity: 1;
 }
 
 @media screen and (max-width: 627px) {
@@ -97,11 +105,13 @@
   }
 
   .card__title-bridge {
-    width: 95px;
+    max-width: 240px;
     height: 16px;
     font-size: 16px;
     line-height: 1;
+    text-overflow: ellipsis;
     white-space: nowrap;
+    overflow: hidden;
     margin: 0;
   }
 
