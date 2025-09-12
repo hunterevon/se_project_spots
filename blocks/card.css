@@ -67,7 +67,7 @@
   opacity: 1;
 }
 
-@media screen and (max-width: 627px) {
+@media screen and (max-width: 630px) {
   .card__image {
     height: 288px;
     margin-bottom: 12px;

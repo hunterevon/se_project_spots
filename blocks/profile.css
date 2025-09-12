@@ -56,7 +56,7 @@
   font-size: 16px;
   line-height: 1;
   color: rgba(33, 33, 33, 0.7);
-  background-color: #fcf5e5;
+  background: none;
   border: none;
   gap: 8px;
 }
@@ -103,7 +103,7 @@
   height: 12px;
 }
 
-@media screen and (max-width: 627px) {
+@media screen and (max-width: 630px) {
   .profile {
     flex-direction: column;
     max-width: 288px;
@@ -137,9 +137,8 @@
 
   .profile__edit-btn {
     padding: 0;
-    width: 107.34px;
+    max-width: 107.34px;
     height: 16px;
-    border: transparent;
   }
 
   .profile__post-btn {
