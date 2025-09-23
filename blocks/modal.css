@@ -102,6 +102,10 @@
 }
 
 @media screen and (max-width: 630px) {
+  .modal__container {
+    padding: 22px 12px 12px;
+  }
+
   .modal__title {
     font-size: 20px;
     line-height: 1;
@@ -113,5 +117,10 @@
 
   .modal__submit-btn {
     max-width: none;
+  }
+
+  .modal__close-btn {
+    top: 12px;
+    right: 12px;
   }
 }
