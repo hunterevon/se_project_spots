@@ -43,6 +43,7 @@
 
 .modal__close-btn:hover {
   cursor: pointer;
+  opacity: 1;
 }
 
 .modal__title {
@@ -81,6 +82,10 @@
   line-height: 1;
 }
 
+.modal__input:hover {
+  border-color: rgba(33, 33, 33, 1);
+}
+
 .modal__input::placeholder {
   color: rgba(33, 33, 33, 0.3);
 }
@@ -99,6 +104,7 @@
 
 .modal__submit-btn:hover {
   cursor: pointer;
+  background-color: rgba(33, 33, 33, 0.8);
 }
 
 @media screen and (max-width: 630px) {
