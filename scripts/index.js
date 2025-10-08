@@ -76,7 +76,6 @@ function getCardElement(data) {
   const cardDeleteBtn = cardElement.querySelector(".card__delete-btn");
   cardDeleteBtn.addEventListener("click", () => {
     cardElement.remove();
-    cardElement = null;
   });
 
   cardImageEl.addEventListener("click", () => {
@@ -126,7 +125,7 @@ function handleEditProfileSubmit(evt) {
   evt.preventDefault();
   profileNameEl.textContent = editProfileNameInput.value;
   profileDescriptionEl.textContent = editProfileDescriptionInput.value;
-  closeModal(newPostModal);
+  closeModal(editProfileModal);
 }
 
 previewModalCloseBtn.addEventListener("click", function () {
@@ -149,6 +148,7 @@ function handleNewPostSubmit(evt) {
   const cardElement = getCardElement(inputValues);
   cardsList.prepend(cardElement);
 
+  newPostForm.reset();
   closeModal(newPostModal);
 }
 
