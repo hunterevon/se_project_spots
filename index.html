@@ -66,13 +66,7 @@
       </footer>
       <div class="modal" id="edit-profile-modal">
         <div class="modal__container">
-          <button type="button" class="modal__close-btn">
-            <img
-              src="./images/close-icon.svg"
-              alt="Close Icon"
-              class="modal__close-btn-icon"
-            />
-          </button>
+          <button type="button" class="modal__close-btn"></button>
           <h2 class="modal__title">Edit profile</h2>
           <form class="modal__form">
             <label for="profile-name-input" class="modal__label">
@@ -99,14 +93,8 @@
       </div>
       <div class="modal" id="new-post-modal">
         <div class="modal__container">
-          <button type="button" class="modal__close-btn">
-            <img
-              src="./images/close-icon.svg"
-              alt="Close Icon"
-              class="modal__close-btn-icon"
-            />
-          </button>
-          <h2 class="modal__title">New post</h2>
+          <button type="button" class="modal__close-btn"></button>
+          <h3 class="modal__title">New post</h3>
           <form class="modal__form">
             <label for="card-image-input" class="modal__label">
               Image link
@@ -131,6 +119,22 @@
         </div>
       </div>
     </div>
+
+    <div class="modal modal_type_preview" id="preview-modal">
+      <div class="modal__image-container">
+        <button
+          type="button"
+          class="modal__close-btn modal__close-btn_type_preview"
+        ></button>
+        <img
+          src="https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg"
+          alt=""
+          class="modal__image"
+        />
+        <p class="modal__caption">Golden Gate bridge</p>
+      </div>
+    </div>
+
     <script src="./scripts/index.js"></script>
   </body>
 </html>
