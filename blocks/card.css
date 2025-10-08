@@ -1,3 +1,10 @@
+.card {
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
 .card__image {
   height: 413px;
   width: 100%;
@@ -8,10 +15,14 @@
 
 .card__title {
   margin-top: 12px;
+  max-width: 353px;
   font-weight: 500;
   font-size: 20px;
   line-height: 1.2;
   color: rgba(33, 33, 33, 1);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .card__title-val {
@@ -32,9 +43,6 @@
 .card__title-bridge {
   width: 353px;
   height: 24px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 .card__title-tunnel {
@@ -51,6 +59,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.card__delete-btn {
+  background: transparent url(../images/Delete-icon.svg) center no-repeat;
+  border: none;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 0;
+}
+
+.card__delete-btn:hover {
+  background: transparent url(../images/delete-btn-hover.svg) center no-repeat;
+  cursor: pointer;
 }
 
 .card__like-btn {
