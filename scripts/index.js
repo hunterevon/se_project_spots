@@ -100,6 +100,49 @@ function closeModal(modal) {
   modal.classList.remove("modal_is-opened");
 }
 
+const profileOverlayModal = document.querySelector("#edit-profile-modal");
+const postOverlayModal = document.querySelector("#new-post-modal");
+const previewOverlayModal = document.querySelector("#preview-modal");
+
+profileOverlayModal.addEventListener("click", function (event) {
+  if (event.target === profileOverlayModal) {
+    closeModal(editProfileModal);
+  }
+});
+
+postOverlayModal.addEventListener("click", function (event) {
+  if (event.target === postOverlayModal) {
+    closeModal(newPostModal);
+  }
+});
+
+previewOverlayModal.addEventListener("click", function (event) {
+  if (event.target === previewOverlayModal) {
+    closeModal(previewModal);
+  }
+});
+
+const allModals = [editProfileModal, newPostModal, previewModal];
+
+function handleEscapeKey(event) {
+  if (event.key === "Escape") {
+    const openModal = document.querySelector(".modal_is-opened");
+    if (openModal) {
+      closeModal(openModal);
+    }
+  }
+}
+
+function openModal(modal) {
+  modal.classList.add("modal_is-opened");
+  document.addEventListener("keydown", handleEscapeKey);
+}
+
+function closeModal(modal) {
+  modal.classList.remove("modal_is-opened");
+  document.removeEventListener("keydown", handleEscapeKey);
+}
+
 editProfileBtn.addEventListener("click", function () {
   editProfileNameInput.value = profileNameEl.textContent;
   editProfileDescriptionInput.value = profileDescriptionEl.textContent;
