@@ -34,7 +34,7 @@
 .profile__description {
   margin: 0;
   width: 97px;
-  height: 16px;
+  min-height: 16px;
   font-weight: 500;
   font-size: 16px;
   line-height: 1;
