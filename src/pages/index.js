@@ -264,9 +264,25 @@ function getCardElement(data) {
   cardImageEl.alt = data.name;
 
   // Like toggle
-  cardLikeBtn.addEventListener("click", () =>
-    cardLikeBtn.classList.toggle("card__like-btn_active")
-  );
+  cardLikeBtn.isLiked = data.isLiked;
+  if (data.isLiked) {
+    cardLikeBtn.classList.add("card__like-btn_active");
+  }
+
+  function handleLike(evt, id) {
+    const isLiked = evt.target.classList.contains("card__like-btn_active");
+    api
+      .handleLike(id, isLiked)
+      .then((data) => {
+        if (data.isLiked) {
+          evt.target.classList.add("card__like-btn_active");
+        } else {
+          evt.target.classList.remove("card__like-btn_active");
+        }
+      })
+      .catch(console.error);
+  }
+  cardLikeBtn.addEventListener("click", (evt) => handleLike(evt, data._id));
 
   // Delete card
   function handleDeleteSubmit(evt) {
@@ -285,7 +301,7 @@ function getCardElement(data) {
     selectedCardId = cardId;
     openModal(deleteModal);
   }
-  cardDeleteBtn.addEventListener("click", (evt) =>
+  cardDeleteBtn.addEventListener("click", () =>
     handleDeleteCard(cardElement, data._id)
   );
 
