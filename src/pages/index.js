@@ -2,6 +2,7 @@
 // 1. IMPORTS & STYLES
 // =======================
 import Api from "../utils/Api.js";
+import { submitButtonText } from "../utils/helpers.js";
 import "./index.css";
 import {
   settings,
@@ -9,37 +10,6 @@ import {
   resetValidation,
   disableButton,
 } from "../scripts/validation.js";
-
-const initialCards = [
-  {
-    name: "Golden Gate bridge",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg",
-  },
-  {
-    name: "Val Thorens",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
-  },
-  {
-    name: "Restaurant terrace",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg",
-  },
-  {
-    name: "An outdoor cafe",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg",
-  },
-  {
-    name: "A very long bridge, over the forest and through the trees",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg",
-  },
-  {
-    name: "Tunnel with morning light",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg",
-  },
-  {
-    name: "Mountain house",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
-  },
-];
 
 // =======================
 // 2. API INITIALIZATION
@@ -190,6 +160,10 @@ editProfileForm.addEventListener("submit", handleEditProfileSubmit);
 
 function handleEditProfileSubmit(evt) {
   evt.preventDefault();
+
+  const submitBtn = evt.submitter;
+  submitButtonText(submitBtn, true);
+
   api
     .editUserInfo({
       name: editProfileNameInput.value,
@@ -200,7 +174,10 @@ function handleEditProfileSubmit(evt) {
       profileDescriptionEl.textContent = data.about;
       closeModal(editProfileModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      submitButtonText(submitBtn, false);
+    });
 }
 
 // =======================
@@ -212,6 +189,9 @@ newPostForm.addEventListener("submit", handleNewPostSubmit);
 
 function handleNewPostSubmit(evt) {
   evt.preventDefault();
+  const submitBtn = evt.submitter;
+  submitButtonText(submitBtn, true);
+
   api
     .addPost({
       name: newCardCaptionInput.value,
@@ -224,7 +204,10 @@ function handleNewPostSubmit(evt) {
       disableButton(newPostSubmitBtn, settings);
       closeModal(newPostModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      submitButtonText(submitBtn, false);
+    });
 }
 
 // =======================
@@ -236,6 +219,8 @@ editAvatarForm.addEventListener("submit", handleAvatarSubmit);
 
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
+  const submitBtn = evt.submitter;
+  submitButtonText(submitBtn, true);
   api
     .editAvatarInfo({ avatar: editAvatarInput.value })
     .then((data) => {
@@ -244,7 +229,10 @@ function handleAvatarSubmit(evt) {
       disableButton(editAvatarSubmitBtn, settings);
       closeModal(editAvatarModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      submitButtonText(submitBtn, false);
+    });
 }
 
 // =======================
@@ -286,6 +274,8 @@ function getCardElement(data) {
 
   // Delete card
   function handleDeleteSubmit(evt) {
+    const deleteBtn = evt.submitter;
+    submitButtonText(deleteBtn, true, "Delete", "Deleting...");
     evt.preventDefault();
     api
       .deleteCard(selectedCardId)
@@ -293,7 +283,10 @@ function getCardElement(data) {
         selectedCard.remove();
         closeModal(deleteModal);
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {
+        submitButtonText(deleteBtn, false, "Delete", "Deleting...");
+      });
   }
 
   function handleDeleteCard(cardElement, cardId) {
