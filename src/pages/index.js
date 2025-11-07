@@ -98,6 +98,8 @@ const overlayModals = [
 api
   .getAppInfo()
   .then(([cards, users]) => {
+    console.log("cards:", cards);
+    console.log("users:", users);
     cards.forEach((item) => {
       const cardElement = getCardElement(item);
       cardsList.append(cardElement);
@@ -172,6 +174,7 @@ function handleEditProfileSubmit(evt) {
     .then((data) => {
       profileNameEl.textContent = data.name;
       profileDescriptionEl.textContent = data.about;
+      disableButton(editProfileSubmitBtn, settings);
       closeModal(editProfileModal);
     })
     .catch(console.error)
@@ -272,23 +275,7 @@ function getCardElement(data) {
   }
   cardLikeBtn.addEventListener("click", (evt) => handleLike(evt, data._id));
 
-  // Delete card
-  function handleDeleteSubmit(evt) {
-    const deleteBtn = evt.submitter;
-    submitButtonText(deleteBtn, true, "Delete", "Deleting...");
-    evt.preventDefault();
-    api
-      .deleteCard(selectedCardId)
-      .then(() => {
-        selectedCard.remove();
-        closeModal(deleteModal);
-      })
-      .catch(console.error)
-      .finally(() => {
-        submitButtonText(deleteBtn, false, "Delete", "Deleting...");
-      });
-  }
-
+  // Delete Modal Popup
   function handleDeleteCard(cardElement, cardId) {
     selectedCard = cardElement;
     selectedCardId = cardId;
@@ -297,8 +284,6 @@ function getCardElement(data) {
   cardDeleteBtn.addEventListener("click", () =>
     handleDeleteCard(cardElement, data._id)
   );
-
-  deleteForm.addEventListener("submit", handleDeleteSubmit);
 
   // Preview image
   cardImageEl.addEventListener("click", () => {
@@ -317,6 +302,24 @@ function getCardElement(data) {
 deleteModalCloseBtn.addEventListener("click", () => closeModal(deleteModal));
 deleteModalCancelBtn.addEventListener("click", () => closeModal(deleteModal));
 deleteModalDeleteBtn.addEventListener("click", () => closeModal(deleteModal));
+
+// Delete card
+function handleDeleteSubmit(evt) {
+  const deleteBtn = evt.submitter;
+  submitButtonText(deleteBtn, true, "Delete", "Deleting...");
+  evt.preventDefault();
+  api
+    .deleteCard(selectedCardId)
+    .then(() => {
+      selectedCard.remove();
+      closeModal(deleteModal);
+    })
+    .catch(console.error)
+    .finally(() => {
+      submitButtonText(deleteBtn, false, "Delete", "Deleting...");
+    });
+}
+deleteForm.addEventListener("submit", handleDeleteSubmit);
 
 // =======================
 // 11. VALIDATION ENABLE
