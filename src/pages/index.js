@@ -98,8 +98,6 @@ const overlayModals = [
 api
   .getAppInfo()
   .then(([cards, users]) => {
-    console.log("cards:", cards);
-    console.log("users:", users);
     cards.forEach((item) => {
       const cardElement = getCardElement(item);
       cardsList.append(cardElement);
